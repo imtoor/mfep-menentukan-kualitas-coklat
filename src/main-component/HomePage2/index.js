@@ -43,17 +43,7 @@ const HomePage2 =({ addToCart,addToWishList }) => {
                 addToWishListProduct={addToWishListProduct}
                 products={products}
             />
-            <OfferSection/>
-            <FlashSale
-                addToCartProduct={addToCartProduct}
-                addToWishListProduct={addToWishListProduct}
-                products={products}
-            />
-            <Project/>
             <Service/>
-            <Testimonial/>
-            <Client/>
-            <BlogSection/>
             <Footer/> 
             <Scrollbar/>
         </Fragment>

@@ -27,12 +27,10 @@ const Product = ({ products, addToCartProduct, addToWishListProduct }) => {
           <div className="col-lg-6 offset-lg-3">
             <div className="section-title">
               <h2>
-                100% Fresh <span>Honey</span>
+                100% Coklat <span>Pilihan</span>
               </h2>
               <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry has been the industry's standard consectetur
-                adipisicing elit.
+                Berbagai pilihan coklat dengan kualitas terbaik
               </p>
             </div>
           </div>

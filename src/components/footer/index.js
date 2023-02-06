@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link}  from 'react-router-dom'
-import Logo from '../../images/logo.png'
+import Logo from '../../images/cocoa-bean.png'
 
 
 const Footer = (props) =>{
@@ -17,10 +17,9 @@ const Footer = (props) =>{
                     <div className="col col-lg-3 col-md-6 col-sm-12 col-12">
                         <div className="widget about-widget">
                             <div className="logo widget-title">
-                                <Link onClick={ClickHandler} to="/"><img src={Logo} alt="ft-logo"/> Annahl</Link>
+                                <Link onClick={ClickHandler} to="/"><img src={Logo} alt="ft-logo"/> Coklatku</Link>
                             </div>
-                            <p>Management consulting includes a broad range of activities, and the many firms and
-                                their members often define these practices.</p>
+                            <p>Coklatku adalah toko coklat online langsung dari pertanian.</p>
                             <ul>
                                 <li>
                                     <Link onClick={ClickHandler} to="/">
@@ -46,47 +45,23 @@ const Footer = (props) =>{
                         </div>
                     </div>
                     <div className="col col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div className="widget link-widget">
+                            
+                        </div>
+                    </div>                    
+                    <div className="col col-lg-6 col-md-6 col-sm-12 col-12">
                         <div className="widget tp-service-link-widget">
                             <div className="widget-title">
-                                <h3>Contact </h3>
+                                <h3>Kontak </h3>
                             </div>
                             <div className="contact-ft">
                                 <ul>
                                     <li><i className="fi flaticon-pin"></i>7 Green Lake Street Crawfordsville, IN 47933
                                     </li>
-                                    <li><i className="fi flaticon-call"></i>+1 800 123 456 789</li>
-                                    <li><i className="fi flaticon-envelope"></i>Annahl@gmail.com</li>
+                                    <li><i className="fi flaticon-call"></i>+62 831-3929-2954</li>
+                                    <li><i className="fi flaticon-envelope"></i>coklatku@gmail.com</li>
                                 </ul>
                             </div>
-                        </div>
-                    </div>
-                    <div className="col col-lg-3 col-md-6 col-sm-12 col-12">
-                        <div className="widget link-widget">
-                            <div className="widget-title">
-                                <h3>My Account</h3>
-                            </div>
-                            <ul>
-                                <li><Link onClick={ClickHandler} to="/project">Our Projects</Link></li>
-                                <li><Link onClick={ClickHandler} to="/shop">Our Shop</Link></li>
-                                <li><Link onClick={ClickHandler} to="/wishlist">Wishlist</Link></li>
-                                <li><Link onClick={ClickHandler} to="/checkout">Checkout</Link></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="col col-lg-3 col-md-6 col-sm-12 col-12">
-                        <div className="widget newsletter-widget">
-                            <div className="widget-title">
-                                <h3>Newsletter</h3>
-                            </div>
-                            <p>You will be notified when somthing new will be appear.</p>
-                            <form>
-                                <div className="input-1">
-                                    <input type="email" className="form-control" placeholder="Email Address *" required/>
-                                </div>
-                                <div className="submit clearfix">
-                                    <button type="submit"><i className="ti-email"></i></button>
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -96,8 +71,7 @@ const Footer = (props) =>{
             <div className="container">
                 <div className="row">
                     <div className="col col-xs-12">
-                        <p className="copyright"> Copyright &copy; 2021 Annahl by <Link onClick={ClickHandler} to="/">themepresss</Link>.
-                            All Rights Reserved.</p>
+                        <p className="copyright"> Copyright&copy; 2023 Coklatku by Ashar.</p>
                     </div>
                 </div>
             </div>

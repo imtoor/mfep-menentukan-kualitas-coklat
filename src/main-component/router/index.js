@@ -31,7 +31,7 @@ const AllRoute = () => {
     <div className="App">
        <Router>
           <Switch>
-            <Route exact path='/' component={Homepage}/>
+            <Route exact path='/' component={Homepage2}/>
             <Route path='/home' component={Homepage} />
             <Route path='/home2' component={Homepage2} />
             <Route path='/about' component={AboutPage} />

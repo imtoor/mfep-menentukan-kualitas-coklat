@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import VideoModal from '../ModalVideo'
-import abimg from '../../images/abou2.jpg'
+import abimg from '../../images/abou3.jpg'
 
 
 const About = (props) => {
@@ -24,15 +24,15 @@ const About = (props) => {
                         <div className="about-area">
                             <div className="about-wrap">
                                 <div className="about-title">
-                                    <small>About our Company</small>
-                                    <h2>All in one <span>to make a</span> different structure</h2>
+                                    <small>Tentang Coklatku</small>
+                                    <h2>Semua parameter kualitas coklat <span>terbaik</span> ada disini</h2>
                                 </div>
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint placeat consectetur
                                     sapiente tempore nobis iure quos neque laboriosam, doloribus labore ad assumenda
                                     veritatis asperiores possimus, tenetur id dolorum minus ipsa, quam eligendi odit
                                     accusamus necessitatibus. Dicta aut delectus minima atque illo hic, totam deleniti
                                     magni nam, ex perferendis, excepturi impedit voluptates ipsam.</p>
-                                <Link onClick={ClickHandler} to="/about" className="btn theme-btn" >More About<i className="fa fa-angle-double-right"></i></Link>
+                                <Link onClick={ClickHandler} to="/about" className="btn theme-btn" >Baca Selanjutnya<i className="fa fa-angle-double-right"></i></Link>
                             </div>
                         </div>
                     </div>

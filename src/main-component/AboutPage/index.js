@@ -12,10 +12,9 @@ const AboutPage =() => {
     return(
         <Fragment>
             <Navbar hClass={"header-style-2"} />
-            <PageTitle pageTitle={'About Us'} pagesub={'About'}/> 
+            <PageTitle pageTitle={'Tentang Kami'} pagesub={'Tentang'}/> 
             <About/>
             <Category2 StyleClass={'style-2'}/>
-            <TeamSection/>
             <Footer/>
             <Scrollbar/>
         </Fragment>

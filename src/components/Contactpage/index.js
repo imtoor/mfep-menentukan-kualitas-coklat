@@ -9,7 +9,7 @@ const Contactpage = () => {
                 <div className="row">
                     <div className="col col-lg-6 col-12">
                         <div className="section-title-s3 section-title-s5">
-                            <h2>Our Contacts</h2>
+                            <h2>Kontak Kami</h2>
                         </div>
                         <div className="contact-details">
                             <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classNameical Latin literature from 45 BC, making it over 2000 years old. </p>
@@ -18,22 +18,22 @@ const Contactpage = () => {
                                     <div className="icon">
                                         <i className="ti-location-pin"></i>
                                     </div>
-                                    <h5>Our Location</h5>
+                                    <h5>Lokasi</h5>
                                     <p>245 King Street, Touterie Victoria 8520 Australia</p>
                                 </li>
                                 <li>
                                     <div className="icon">
                                         <i className="ti-mobile"></i>
                                     </div>
-                                    <h5>Phone</h5>
-                                    <p>0-123-456-7890</p>
+                                    <h5>Telepon</h5>
+                                    <p>+62 831-3929-2954</p>
                                 </li>
                                 <li>
                                     <div className="icon">
                                         <i className="ti-email"></i>
                                     </div>
                                     <h5>Email</h5>
-                                    <p>sample@gmail.com</p>
+                                    <p>coklatku@gmail.com</p>
                                 </li>
                             </ul>
                         </div>
@@ -41,7 +41,7 @@ const Contactpage = () => {
                     <div className="col col-lg-6 col-12">
                         <div className="contact-form-area">
                             <div className="section-title-s3 section-title-s5">
-                                <h2>Quick Contact Form</h2>
+                                <h2>Kirim Pesan</h2>
                             </div>
                             <div className="contact-form">
                                 <ContactForm/>

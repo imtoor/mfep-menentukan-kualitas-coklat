@@ -15,8 +15,8 @@ const Service = (props) => {
                                 <span><img draggable="false" src={serviceimg} alt=""/></span>
                             </div>
                             <div className="service-icon-text">
-                                <h2>Free Shipping</h2>
-                                <span>Order Over $560</span>
+                                <h2>Pengiriman Cepat</h2>
+                                <span>Ke Seluruh Indonesia</span>
                             </div>
                         </div>
                     </div>
@@ -26,8 +26,8 @@ const Service = (props) => {
                                 <span><img draggable="false" src={serviceimg2} alt=""/></span>
                             </div>
                             <div className="service-icon-text">
-                                <h2>Easy Payment</h2>
-                                <span>100% Secure Payment</span>
+                                <h2>Pembayaran Mudah</h2>
+                                <span>100% Keamanan Pembayaran</span>
                             </div>
                         </div>
                     </div>
@@ -38,7 +38,7 @@ const Service = (props) => {
                             </div>
                             <div className="service-icon-text">
                                 <h2>20/07 Support</h2>
-                                <span>Any time Support </span>
+                                <span>Support Kendala Kapanpun, Dimanapun</span>
                             </div>
                         </div>
                     </div>

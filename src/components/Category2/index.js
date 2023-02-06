@@ -1,8 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import catimg from '../../images/category/icon-1.png'
-import catimg2 from '../../images/category/icon-2.png'
-import catimg3 from '../../images/category/icon-3.png'
+import catimg from '../../images/cocoa-bean.png'
+import catimg2 from '../../images/cocoa-bean.png'
+import catimg3 from '../../images/cocoa-bean.png'
 
 
 const Category2 = (props) => {
@@ -20,7 +20,7 @@ const Category2 = (props) => {
                                     <img src={catimg} alt=""/>
                                 </div>
                                 <div className="category-content">
-                                    <h2><Link onClick={ClickHandler} to="/shop">Queen Bee Honey</Link></h2>
+                                    <h2><Link onClick={ClickHandler} to="/shop">Dari Kakao Pilihan</Link></h2>
                                     <p>Lorem Ipsum is simply dummy text of the printing industry has been the industry's
                                         standard eos fugit industry's standard consectetur ipsum.</p>
                                 </div>
@@ -32,7 +32,7 @@ const Category2 = (props) => {
                                     <img src={catimg2} alt=""/>
                                 </div>
                                 <div className="category-content">
-                                    <h2><Link onClick={ClickHandler} to="/shop">Sunflower Honey</Link></h2>
+                                    <h2><Link onClick={ClickHandler} to="/shop">Dengan Kualitas Terbaik</Link></h2>
                                     <p>Lorem Ipsum is simply dummy text of the printing industry has been the industry's
                                         standard eos fugit industry's standard consectetur ipsum.</p>
                                 </div>
@@ -44,7 +44,7 @@ const Category2 = (props) => {
                                     <img src={catimg3} alt=""/>
                                 </div>
                                 <div className="category-content">
-                                    <h2><Link onClick={ClickHandler} to="/shop">Manuka Honey</Link></h2>
+                                    <h2><Link onClick={ClickHandler} to="/shop">Harga Terjangkau</Link></h2>
                                     <p>Lorem Ipsum is simply dummy text of the printing industry has been the industry's
                                         standard eos fugit industry's standard consectetur ipsum.</p>
                                 </div>

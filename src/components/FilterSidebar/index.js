@@ -28,7 +28,7 @@ const FilterSidebar = ({ filter, changeHandler, priceChangeHandler }) => {
       <div className="shop-filter-wrap">
         <div className="filter-item">
           <div className="shop-filter-item">
-            <h2>Search</h2>
+            <h2>Cari</h2>
             <div className="shop-filter-search">
               <form>
                 <div>
