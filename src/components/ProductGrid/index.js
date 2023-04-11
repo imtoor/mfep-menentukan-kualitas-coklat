@@ -1,14 +1,15 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import DefaultModal from "../Modal";
+import { evaluation, weightedEvaluation, totalWeightEvaluation } from "../../js/mfep";
 
 const ProductGrid = ({ products, addToCartProduct,addToWishListProduct }) => {
   const ClickHandler = () => {
     window.scrollTo(10, 0);
   };
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   function handleClose() {
     setOpen(false);
@@ -21,10 +22,53 @@ const ProductGrid = ({ products, addToCartProduct,addToWishListProduct }) => {
     setState(item);
   };
 
+  let evaluationData = evaluation(products);
+  let weightedEvaluationData = weightedEvaluation(evaluationData);
+  let totalWeightEvaluationData = totalWeightEvaluation(weightedEvaluationData);
+
+  products.map((item, index) => {
+    if(item.title == totalWeightEvaluationData[index].title) {
+      item.weightEvaluation = totalWeightEvaluationData[index].total;
+    }
+  })
+
+  products.sort((totalWeightA, totalWeightB) => {
+      return totalWeightB.weightEvaluation - totalWeightA.weightEvaluation;
+  })
+
+
   return (
 
     <div className="product-wrap">
       <div className="row align-items-center">
+  
+        <p>Data coklat telah tersorting otomatis menggunakan Metode MFEP untuk memastikan kualitas coklat terbaik.
+          Berikut adalah Factor Weight / Kriteria dan Bobot dari Metode MFEP yang digunakan dalam melakukan Sorting:
+        </p>
+        <table className="table table-striped text-center" border="1">
+          <thead>
+            <tr>
+              <th>Kriteria</th>
+              <th>Bobot</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Kadar Air</td>
+              <td>0.5</td>
+            </tr>
+            <tr>
+              <td>Tekstur</td>
+              <td>0.3</td>
+            </tr>
+            <tr>
+              <td>Aroma</td>
+              <td>0.2</td>
+            </tr>
+          </tbody>
+        </table>
+        <hr />
+  
         {products.length > 0 &&
           products.map((product, pitem) => (
             <div
@@ -46,16 +90,6 @@ const ProductGrid = ({ products, addToCartProduct,addToWishListProduct }) => {
                       </button>
                     </li>
                     <li>
-                        <button
-                            data-bs-toggle="tooltip"
-                            data-bs-html="true"
-                            title="Add to Cart"
-                            onClick={() => handleClickOpen(product)}
-                          >
-                            <i className="fi ti-eye"></i>
-                        </button>
-                    </li>
-                    <li>
                       <button
                           data-bs-toggle="tooltip"
                           data-bs-html="true"
@@ -66,42 +100,30 @@ const ProductGrid = ({ products, addToCartProduct,addToWishListProduct }) => {
                       </button>
                     </li>
                   </ul>
-                  <div className="offer-thumb">
-                    <span>{product.offer}</span>
-                  </div>
+
                 </div>
                 <div className="product-content">
                   <h3>
                     <Link onClick={ClickHandler} onClick={ClickHandler} to={`/product-single/${product.id}`}>
-                      {product.title}
+                      {product.title.toUpperCase()}
                     </Link>
                   </h3>
+                  <div>
+                    <span><u>Deskripsi:</u><br/> 
+                    Tekstur: {product.tekstur}<br/>
+                    Kadar Air: {product.kadarAir}<br/>
+                    Aroma: {product.aroma}<br/>
+                    </span>
+                    <br/>
+                  </div>
                   <div className="product-btm">
                     <div className="product-price">
                       <ul>
-                        <li>${product.price}</li>
-                        <li>${product.delPrice}</li>
+                        <li><h3>Rp{new Intl.NumberFormat().format(product.price)},-</h3></li>
+                        <li></li>
                       </ul>
                     </div>
-                    <div className="product-ratting">
-                      <ul>
-                        <li>
-                          <i className="fa fa-star" aria-hidden="true"></i>
-                        </li>
-                        <li>
-                          <i className="fa fa-star" aria-hidden="true"></i>
-                        </li>
-                        <li>
-                          <i className="fa fa-star" aria-hidden="true"></i>
-                        </li>
-                        <li>
-                          <i className="fa fa-star" aria-hidden="true"></i>
-                        </li>
-                        <li>
-                          <i className="fa fa-star" aria-hidden="true"></i>
-                        </li>
-                      </ul>
-                    </div>
+                                        
                   </div>
                 </div>
               </div>

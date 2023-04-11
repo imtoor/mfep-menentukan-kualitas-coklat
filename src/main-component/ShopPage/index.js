@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import Navbar from "../../components/Navbar";
 import PageTitle from "../../components/pagetitle";
@@ -8,15 +8,113 @@ import FilterSidebar from "../../components/FilterSidebar";
 import FilterAllProduct from "../../components/FilterAllProduct";
 import api from "../../api";
 import { addToCart, addToWishList } from "../../store/actions/action";
+import { evaluation, weightedEvaluation, totalWeightEvaluation } from "../../js/mfep";
 
 const ShopPage = ({ addToCart, addToWishList }) => {
-  const productsArray = api();
+
+    // const productsArray = api()
+
+  const apiUrl = "https://admin-coklat.nsdmcenter.com/api/get-products"
+  
+  const [productsArray, setProductsArray] = useState([])
+
+  const getProducts = async() => {
+
+    // const request = await fetch(apiUrl)
+    // const response = await request.json()
+      
+    // response.data.forEach((item) => {
+          
+    //   setProductsArray([{
+    //     "id": item.id,
+    //     "proImg": "/product/1.png",
+    //     "offer": "-28%",
+    //     "title": item.nama,
+    //     "price": item.harga,
+    //     "delPrice": "",
+    //     "link": "/product-single",
+    //     "size": "small",
+    //     "color": "000",
+    //     "brand": "forest",
+    //     "stock": "In Stock",
+    //     "tekstur": item.tekstur,
+    //     "kadarAir": item.kadar_air,
+    //     "aroma": item.aroma,
+    //     "satuan": item.satuan,
+    //   }])    
+  
+    // })   
+
+    setProductsArray([
+      {
+      "id": 1,
+      "proImg": "/product/1.png",
+      "offer": "-28%",
+      "title": 'ciollo',
+      "price": 100000,
+      "delPrice": "",
+      "link": "/product-single",
+      "size": "small",
+      "color": "000",
+      "brand": "kakao",
+      "stock": "Ada Stok",
+      "tekstur": 'keras',
+      "kadarAir": 'rendah',
+      "aroma": 'tidak berbau',
+      "satuan": 'Kg',
+      "weightEvaluation":0
+      },
+      {
+      "id": 2,
+      "proImg": "/product/1.png",
+      "offer": "-28%",
+      "title": 'forastero',
+      "price": 80000,
+      "delPrice": "",
+      "link": "/product-single",
+      "size": "small",
+      "color": "000",
+      "brand": "kakao",
+      "stock": "Ada Stok",
+      "tekstur": 'sedang',
+      "kadarAir": 'sedang',
+      "aroma": 'busuk',
+      "satuan": 'Kg',
+      "weightEvaluation":0        
+      },
+      {
+      "id": 3,
+      "proImg": "/product/1.png",
+      "offer": "-28%",
+      "title": 'trinitario',
+      "price": 130000,
+      "delPrice": "",
+      "link": "/product-single",
+      "size": "small",
+      "color": "000",
+      "brand": "kakao",
+      "stock": "Ada Stok",
+      "tekstur": 'lembek',
+      "kadarAir": 'tinggi',
+      "aroma": 'harum',
+      "satuan": 'Kg',
+      "weightEvaluation":0          
+      }
+    ])
+
+  }
+
+  useEffect(() => {
+
+    getProducts()    
+
+  }, [])
 
   const [filter, setFilter] = useState({
     price: "",
-    size: "",
-    color: "",
-    brand: "",
+    tekstur: "",
+    kadarAir: "",
+    aroma: "",
   });
 
   const priceChangeHandler = ({ target: { name, value } }) => {
@@ -41,14 +139,14 @@ const ShopPage = ({ addToCart, addToWishList }) => {
   };
 
   const addToCartProduct = (product) => {
-    addToCart(product, 1, filter.color, filter.size);
+    addToCart(product, 1, filter.kadarAir, filter.tekstur, filter.aroma);
   };
 
   const products = productsArray
     .filter((el) => priceFIlter(el.price))
-    .filter((el) => (filter.size ? el.size === filter.size : true))
-    .filter((el) => (filter.color ? el.color === filter.color : true))
-    .filter((el) => (filter.brand ? el.brand === filter.brand : true));
+    .filter((el) => (filter.tekstur ? el.tekstur === filter.tekstur : true))
+    .filter((el) => (filter.kadarAir ? el.kadarAir === filter.kadarAir : true))
+    .filter((el) => (filter.aroma ? el.aroma === filter.aroma : true));
 
   const addToWishListProduct = (products) => {
     addToWishList(products);

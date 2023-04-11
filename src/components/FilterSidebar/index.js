@@ -1,26 +1,26 @@
 import React from "react";
 
-const prices = [
+const harga = [
   {
     id: 1,
-    min: 50,
-    max: 100,
+    min: 75000,
+    max: 100000,
   },
   {
     id: 2,
-    min: 100,
-    max: 200,
+    min: 100000,
+    max: 125000,
   },
   {
     id: 3,
-    min: 200,
+    min: 125000,
     max: null,
   },
 ];
 
-const sizes = ["small", "medium", "large"];
-const colors = ["fff", "000", "cf1105"];
-const brands = ["flower", "hill", "forest"];
+const kadarAir = ["rendah", "sedang", "tinggi"];
+const tekstur = ["lembek", "sedang", "keras"];
+const aroma = ["busuk", "tidak berbau", "harum"];
 
 const FilterSidebar = ({ filter, changeHandler, priceChangeHandler }) => {
   return (
@@ -35,7 +35,7 @@ const FilterSidebar = ({ filter, changeHandler, priceChangeHandler }) => {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Search"
+                    placeholder="Cari produk"
                   />
                   <button type="submit">
                     <i className="ti-search"></i>
@@ -47,11 +47,11 @@ const FilterSidebar = ({ filter, changeHandler, priceChangeHandler }) => {
         </div>
         <div className="filter-item">
           <div className="shop-filter-item">
-            <h2>Price</h2>
+            <h2>Harga</h2>
             <ul>
               <li>
                 <label className="topcoat-radio-button__label">
-                  All prices
+                  Semua
                   <input
                     type="radio"
                     value={""}
@@ -62,11 +62,11 @@ const FilterSidebar = ({ filter, changeHandler, priceChangeHandler }) => {
                   <span className="topcoat-radio-button"></span>
                 </label>
               </li>
-              {prices.map((price) => (
+              {harga.map((price) => (
                 <li>
                   <label className="topcoat-radio-button__label">
-                    ${price.min} {price.max ? "- $" : ""}
-                    {price.max || " and more"}
+                    Rp{price.min} {price.max ? "- Rp" : ""}
+                    {price.max || " ke atas"}
                     <input
                       checked={filter.price.id === price.id}
                       type="radio"
@@ -81,33 +81,34 @@ const FilterSidebar = ({ filter, changeHandler, priceChangeHandler }) => {
             </ul>
           </div>
         </div>
+
         <div className="filter-item">
           <div className="shop-filter-item">
-            <h2>Size</h2>
+            <h2>Tekstur</h2>
             <ul>
               <li>
                 <label className="topcoat-radio-button__label">
-                  All Size
+                  Semua
                   <input
-                    checked={filter.size === ""}
+                    checked={filter.tekstur === ""}
                     type="radio"
                     value=""
                     onChange={changeHandler}
-                    name="size"
+                    name="tekstur"
                   />
                   <span className="topcoat-radio-button"></span>
                 </label>
               </li>
-              {sizes.map((size) => (
+              {tekstur.map((tekstur) => (
                 <li>
                   <label className="topcoat-radio-button__label">
-                    {size}
+                    {tekstur}
                     <input
-                      checked={filter.size === size}
+                      checked={filter.tekstur === tekstur}
                       type="radio"
-                      value={size}
+                      value={tekstur}
                       onChange={changeHandler}
-                      name="size"
+                      name="tekstur"
                     />
                     <span className="topcoat-radio-button"></span>
                   </label>
@@ -116,57 +117,34 @@ const FilterSidebar = ({ filter, changeHandler, priceChangeHandler }) => {
             </ul>
           </div>
         </div>
-        <div className="filter-item">
-          <div className="shop-filter-item color">
-            <h2> Color</h2>
-            <div className="color-name">
-              <ul>
-                {colors.map((color) => (
-                  <li>
-                    <input
-                      id={color}
-                      onChange={changeHandler}
-                      type="radio"
-                      name="color"
-                      value={color}
-                    />
-                    <label
-                      style={{ background: `#${color}` }}
-                      htmlFor={color}
-                    ></label>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
+
         <div className="filter-item">
           <div className="shop-filter-item">
-            <h2>Brand</h2>
+            <h2>Kadar Air</h2>
             <ul>
               <li>
                 <label className="topcoat-radio-button__label">
-                  All Brand
+                  Semua
                   <input
-                    checked={filter.brand === ""}
+                    checked={filter.kadarAir === ""}
                     type="radio"
                     value=""
                     onChange={changeHandler}
-                    name="brand"
+                    name="kadarAir"
                   />
                   <span className="topcoat-radio-button"></span>
                 </label>
               </li>
-              {brands.map((brand) => (
+              {kadarAir.map((val) => (
                 <li>
                   <label className="topcoat-radio-button__label">
-                    {brand}
+                    {val}
                     <input
-                      checked={filter.brand === brand}
+                      checked={filter.kadarAir === val}
                       type="radio"
-                      value={brand}
+                      value={val}
                       onChange={changeHandler}
-                      name="brand"
+                      name="kadarAir"
                     />
                     <span className="topcoat-radio-button"></span>
                   </label>
@@ -175,6 +153,43 @@ const FilterSidebar = ({ filter, changeHandler, priceChangeHandler }) => {
             </ul>
           </div>
         </div>
+
+        <div className="filter-item">
+          <div className="shop-filter-item">
+            <h2>Aroma</h2>
+            <ul>
+              <li>
+                <label className="topcoat-radio-button__label">
+                  Semua
+                  <input
+                    checked={filter.aroma === ""}
+                    type="radio"
+                    value=""
+                    onChange={changeHandler}
+                    name="aroma"
+                  />
+                  <span className="topcoat-radio-button"></span>
+                </label>
+              </li>
+              {aroma.map((val) => (
+                <li>
+                  <label className="topcoat-radio-button__label">
+                    {val}
+                    <input
+                      checked={filter.aroma === val}
+                      type="radio"
+                      value={val}
+                      onChange={changeHandler}
+                      name="aroma"
+                    />
+                    <span className="topcoat-radio-button"></span>
+                  </label>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
       </div>
     </div>
   );

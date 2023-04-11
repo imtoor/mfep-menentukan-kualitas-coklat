@@ -14,32 +14,8 @@ const FilterAllProduct = ({ products, addToCartProduct,addToWishListProduct }) =
   return (
     <div className="col-lg-8">
       <div className="shop-section-top-inner">
-        <div className="shoping-list">
-          <Nav tabs>
-            <NavItem>
-              <NavLink
-                className={classnames({ active: activeTab === "1" })}
-                onClick={() => {
-                  toggle("1");
-                }}
-              >
-                <i className="fa fa-th "></i>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                className={classnames({ active: activeTab === "2" })}
-                onClick={() => {
-                  toggle("2");
-                }}
-              >
-                <i className="fa fa-list"></i>
-              </NavLink>
-            </NavItem>
-          </Nav>
-        </div>
         <div className="shoping-product">
-          <span>Showing Products 1 - 9 Of 9 Result</span>
+          <span>Menampilkan Products 1 - 9 Of 9 Result</span>
         </div>
       </div>
       <TabContent activeTab={activeTab}>
@@ -51,13 +27,6 @@ const FilterAllProduct = ({ products, addToCartProduct,addToWishListProduct }) =
           />
         </TabPane>
 
-        <TabPane tabId="2">
-          <ProductList
-            addToCartProduct={addToCartProduct}
-            addToWishListProduct={addToWishListProduct}
-            products={products}
-          />
-        </TabPane>
       </TabContent>
     </div>
   );
