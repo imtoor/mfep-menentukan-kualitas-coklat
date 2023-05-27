@@ -5,11 +5,15 @@ import { Link } from "react-router-dom";
 import MobileMenu from "../../components/MobileMenu";
 import min3 from "../../images/shop/mini-cart/bee2.png";
 import {totalPrice} from "../../utils";
-import { removeFromCart,removeFromWishList } from "../../store/actions/action";
+import { removeFromCart } from "../../store/actions/action";
+import {toast} from "react-toastify";
+import { Redirect } from "react-router-dom/cjs/react-router-dom";
+
 class Header extends Component {
   state = {
     isCartShow: false,
     isWishlistShow: false,
+    active: ''
   };
 
   cartHandler = () => {
@@ -29,17 +33,64 @@ class Header extends Component {
     });
   };
 
+  checkout = () => {
+    if (window.localStorage.getItem("isLogin") == "1") {
+
+      let checkStorage = JSON.parse(window.localStorage.getItem("persist:root"));
+      if (checkStorage.cartList.length <= 11) {
+        
+        toast.error("Belum ada produk dipilih");
+        setTimeout(() => {
+          window.location = '/shop';
+        }, 1000);
+
+      } else {
+        window.location = '/checkout';
+      }
+
+    } else {
+      toast.error("Kamu belum login");
+      setTimeout(() => {
+        window.location = '/login';
+      }, 1000);
+    }
+  }
   
   render() {
-    const { isCartShow, isWishlistShow, isprofileShow } = this.state;
-    
-    const ClickHandler = () =>{
+    const { isCartShow, isprofileShow } = this.state;
+        
+    const logout = () => {
+      if (localStorage.getItem('isLogin') !== null) {
+        
+        if (localStorage.getItem('isLogin') === '1') {
+          localStorage.setItem('isLogin', 0)
+        }
+
+        toast.success('Anda telah logout! 👈')
+      }
+    }
+
+    const ClickHandler = (e) => {
+      const clicked = e.target.id;
+      if (this.state.active === clicked) {
+        this.setState({active: ''});
+      } else {
+        this.setState({active: clicked});
+      }
+
       window.scrollTo(10, 0);
    }
 
     const { carts } = this.props;
     const { wishs } = this.props;
 
+    const cartsCheck = () => {
+      if (carts.length > 0) {
+        window.location = '/cart';
+      } else {
+        toast.error("Belum ada produk dipilih!");
+      }
+    }
 
     let totalwishlistprice = 0;
     if (wishs && wishs.length > 0) {
@@ -70,24 +121,24 @@ class Header extends Component {
                   </Link>
                   <ul className="nav navbar-nav me-auto mb-2 mb-lg-0">
                     <li>
-                      <Link onClick={ClickHandler} className="active" to="/">
-                        Home
-                      </Link>
+                      <Link onClick={ClickHandler} className={`${this.state.active === "home" ? "active":""}`} id="home" to="/">Home</Link>
                     </li>
                     <li>
-                      <Link onClick={ClickHandler} to="/about">Tentang</Link>
+                      <Link onClick={ClickHandler} className={`${this.state.active === "about" ? "active":""}`} id="about" to="/about">Tentang</Link>
                     </li>
                     <li>
-                      <Link onClick={ClickHandler} to="/shop">Shop</Link>
+                      <Link onClick={ClickHandler} className={`${this.state.active === "shop" ? "active":""}`} id="shop" to="/shop">Shop</Link>
                     </li>
                     <li>
-                      <Link onClick={ClickHandler} to="/contact">Kontak</Link>
+                      <Link onClick={ClickHandler} className={`${this.state.active === "kontak" ? "active":""}`} id="kontak" to="/contact">Kontak</Link>
                     </li>
                   </ul>
                 </div>
               </div>
+              
               <div className="col-lg-2">
                 <div className="header-right d-flex">
+                  <div style={{lineHeight:'40px'}}><u>{(localStorage.getItem('isLogin') !== null && localStorage.getItem('isLogin') === '0' ? '':localStorage.getItem('full_name'))}</u></div>
                   <div className="header-profile-form-wrapper">
                     <button
                       onClick={this.profileHandler}
@@ -102,17 +153,14 @@ class Header extends Component {
                     >
                       <ul>
                         <li>
-                          <Link onClick={ClickHandler} to="/login">Login</Link>
+                          <Link to="/login">Login</Link>
                         </li>
                         <li>
-                          <Link onClick={ClickHandler} to="/register">Daftar</Link>
+                          <Link to="/register">Daftar</Link>
                         </li>
-                        <li>
-                          <Link onClick={ClickHandler} to="/cart">Keranjang</Link>
-                        </li>
-                        <li>
-                          <Link onClick={ClickHandler} to="/checkout">Checkout</Link>
-                        </li>
+                        {
+                          (localStorage.getItem('isLogin') !== null && localStorage.getItem('isLogin') === '1' ? <li><Link onClick={logout} to="#">Logout</Link></li> :'')
+                        }
                       </ul>
                     </div>
                   </div>
@@ -149,7 +197,7 @@ class Header extends Component {
                               <div className="mini-cart-item-des">
                                 <p>{cart.title} </p>
                                 <span className="mini-cart-item-price">
-                                  ${cart.price} x {" "} {cart.qty}
+                                  Rp{new Intl.NumberFormat().format(cart.price)} x {" "} {cart.qty}
                                 </span>
                                 <span className="mini-cart-item-quantity">
                                     <button
@@ -167,13 +215,13 @@ class Header extends Component {
                       </div>
                       <div className="mini-cart-action clearfix">
                         <span className="mini-checkout-price">
-                          Total: ${totalPrice(carts)}
+                          Total: Rp{new Intl.NumberFormat().format(totalPrice(carts))}
                         </span>
                         <div className="mini-btn">
-                          <Link onClick={ClickHandler} to="/checkout" className="view-cart-btn s1">
+                          <Link to="#" onClick={this.checkout} className="view-cart-btn s1">
                             Checkout
                           </Link>
-                          <Link onClick={ClickHandler} to="/cart" className="view-cart-btn">
+                          <Link to="#" onClick={cartsCheck} className="view-cart-btn">
                             Cek Keranjang
                           </Link>
                         </div>
@@ -202,4 +250,4 @@ const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps, { removeFromCart,removeFromWishList })(Header);
+export default connect(mapStateToProps, { removeFromCart })(Header);

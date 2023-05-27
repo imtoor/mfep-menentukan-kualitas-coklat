@@ -8,18 +8,47 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {totalPrice} from "../../utils";
 import {
-  removeFromCart,
+  removeFromCartOnCartPage,
   incrementQuantity,
   decrementQuantity,
+  cartUpdated
 } from "../../store/actions/action";
+import { toast } from "react-toastify";
 
 const CartPage = (props) => {
+
   const ClickHandler = () => {
     window.scrollTo(10, 0);
   };
 
-  const { carts } = props;
+  const checkCarts = () => {
+    if (carts.length > 0) {
+      
+      window.scrollTo(10, 0);
+      if(window.localStorage.getItem('isLogin') === '1') { 
+        window.location = '/checkout';
+      } else {
+        toast.error('Kamu belum login');
+        setTimeout(() => {
+          window.location = '/login';
+        }, 2000);
+      }
 
+    } else {
+      toast.error('Barang belum dipilih!');
+      setTimeout(() => {
+        window.location = '/shop';
+      }, 2000);
+    }    
+  }
+
+  const { carts } = props;
+  
+  if (carts.length == 0) {
+    setTimeout(() => {
+      window.location = '/shop';
+    }, 2000);
+  }
 
   return (
     <Fragment>
@@ -35,29 +64,30 @@ const CartPage = (props) => {
                     <table className="table-responsive cart-wrap">
                       <thead>
                         <tr>
-                          <th className="images images-b">Image</th>
-                          <th className="product-2">Product Name</th>
-                          <th className="pr">Quantity</th>
-                          <th className="ptice">Price</th>
-                          <th className="stock">Total Price</th>
-                          <th className="remove remove-b">Action</th>
+                          <th className="images images-b">Gambar</th>
+                          <th className="product-2">Nama Produk</th>
+                          <th className="pr">Kuantiti</th>
+                          <th className="ptice">Harga</th>
+                          <th className="stock">Total Harga</th>
+                          <th className="remove remove-b">Aksi</th>
                         </tr>
                       </thead>
                       <tbody>
                         {carts &&
                           carts.length > 0 &&
-                          carts.map((catItem, crt) => (
+                          carts.map((cartItem, crt) => (
                             <tr key={crt}>
                               <td className="images">
-                                <img src={catItem.proImg} alt="" />
+                                <img src={cartItem.proImg} alt="" />
                               </td>
                               <td className="product">
                                 <ul>
                                   <li className="first-cart">
-                                    {catItem.title}
+                                    <b>{cartItem.title}</b>
                                   </li>
-                                  <li>Brand : {catItem.brand}</li>
-                                  <li>Size : {catItem.size}</li>
+                                  <li>Tekstur : {cartItem.tekstur}</li>
+                                  <li>Kadar Air : {cartItem.kadarAir}</li>
+                                  <li>Aroma : {cartItem.aroma}</li>
                                 </ul>
                               </td>
                               <td className="stock">
@@ -66,16 +96,16 @@ const CartPage = (props) => {
                                     <Button
                                       className="dec qtybutton"
                                       onClick={() =>
-                                        props.decrementQuantity(catItem.id)
+                                        props.decrementQuantity(cartItem.id)
                                       }
                                     >
                                       -
                                     </Button>
-                                    <input value={catItem.qty} type="text" />
+                                    <input value={cartItem.qty} type="text" />
                                     <Button
                                       className="inc qtybutton"
                                       onClick={() =>
-                                        props.incrementQuantity(catItem.id)
+                                        props.incrementQuantity(cartItem.id)
                                       }
                                     >
                                       +
@@ -83,14 +113,15 @@ const CartPage = (props) => {
                                   </Grid>
                                 </div>
                               </td>
-                              <td className="ptice">${catItem.qty * catItem.price}</td>
-                              <td className="stock">${catItem.qty * catItem.price}</td>
+                              <td className="ptice">Rp{new Intl.NumberFormat().format(cartItem.price)}</td>
+                              <td className="stock">Rp{new Intl.NumberFormat().format(cartItem.qty * cartItem.price)}</td>
                               <td className="action">
                                 <ul>
                                   <li
                                     className="w-btn"
-                                    onClick={() =>
-                                      props.removeFromCart(catItem.id)
+                                    onClick={() => {
+                                        props.removeFromCartOnCartPage(cartItem.id);
+                                      }
                                     }
                                   >
                                     <i className="fi flaticon-delete"></i>
@@ -110,34 +141,25 @@ const CartPage = (props) => {
                           className="theme-btn"
                           to="/shop"
                         >
-                          Continue Shopping{" "}
+                          Lanjutkan Belanja{" "}
                           <i className="fa fa-angle-double-right"></i>
                         </Link>
                       </li>
                       <li>
-                        <button type="submit">Update Cart</button>
+                        <button onClick={props.cartUpdated} type="submit">Update Keranjang</button>
                       </li>
                     </ul>
                   </div>
                   <div className="cart-product-list">
                     <ul>
                       <li>
-                        Total product<span>( {carts.length} )</span>
+                        Total produk<span>( {carts.length} )</span>
                       </li>
                       <li>
-                        Sub Price<span>${totalPrice(carts)}</span>
-                      </li>
-                      <li>
-                        Vat<span>$0</span>
-                      </li>
-                      <li>
-                        Eco Tax<span>$0</span>
-                      </li>
-                      <li>
-                        Delivery Charge<span>$0</span>
+                        Sub Harga<span>Rp{new Intl.NumberFormat().format(totalPrice(carts))}</span>
                       </li>
                       <li className="cart-b">
-                        Total Price<span>${totalPrice(carts)}</span>
+                        Total Harga<span>Rp{new Intl.NumberFormat().format(totalPrice(carts))}</span>
                       </li>
                     </ul>
                   </div>
@@ -145,11 +167,11 @@ const CartPage = (props) => {
                     <ul>
                       <li>
                         <Link
-                          onClick={ClickHandler}
+                          onClick={checkCarts}
                           className="theme-btn"
-                          to="/checkout"
+                          to="#"
                         >
-                          Proceed to Checkout{" "}
+                          Proses ke Checkout{" "}
                           <i className="fa fa-angle-double-right"></i>
                         </Link>
                       </li>
@@ -173,7 +195,8 @@ const mapStateToProps = (state) => {
   };
 };
 export default connect(mapStateToProps, {
-  removeFromCart,
+  removeFromCartOnCartPage,
   incrementQuantity,
   decrementQuantity,
+  cartUpdated
 })(CartPage);

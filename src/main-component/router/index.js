@@ -38,7 +38,7 @@ const AllRoute = () => {
             <Route path='/shop' component={ShopPage} />
             <Route path='/product-single/:id' component={ProductDetailsPage}/>
             <Route path='/checkout' component={CheckoutPage}/>
-            <Route path='/order_received' component={OrderRecived}/>
+            <Route path='/order_received/:id' component={OrderRecived}/>
             <Route path='/cart' component={CartPage}/>
             <Route path='/wishlist' component={WishlistPage}/>
             <Route path='/project-single' component={ProjectSinglePage}/>

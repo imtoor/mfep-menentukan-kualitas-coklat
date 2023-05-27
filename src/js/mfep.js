@@ -22,27 +22,6 @@ const subKriteriaTekstur = {
     'keras': 0.5
 }
 
-// const dataInputan = [
-//   {
-//     'nama': 'criollo',
-//     'subKriteriaAroma': 'tidak berbau',    
-//     'subKriteriaKadarAir': 'rendah',
-//     'subKriteriaTekstur': 'keras',
-//   },
-//   {
-//     'nama': 'forastero',
-//     'subKriteriaAroma': 'busuk',    
-//     'subKriteriaKadarAir': 'sedang',
-//     'subKriteriaTekstur': 'sedang',
-//   },
-//   {
-//     'nama': 'trinitario',
-//     'subKriteriaAroma': 'harum',    
-//     'subKriteriaKadarAir': 'tinggi',
-//     'subKriteriaTekstur': 'lembek',
-//   },
-// ];
-
 export const evaluation = (data = []) => {
 
     let dILength = data.length;
@@ -176,9 +155,3 @@ export const totalWeightEvaluationSort = (data = []) => {
     return result;
 
 }
-
-// let evaluationData = evaluation(dataInputan);
-// let weightedEvaluationData = weightedEvaluation(evaluationData);
-// let totalWeightEvaluationData = totalWeightEvaluation(weightedEvaluationData);
-
-// console.log(totalWeightEvaluationSort(totalWeightEvaluationData));

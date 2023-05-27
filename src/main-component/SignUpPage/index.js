@@ -12,6 +12,7 @@ import './style.scss';
 const SignUpPage = (props) => {
     const [value, setValue] = useState({
         email: '',
+        phone: '',        
         full_name: '',
         password: '',
         confirm_password: '',
@@ -30,12 +31,21 @@ const SignUpPage = (props) => {
     const submitForm = (e) => {
         e.preventDefault();
         if (validator.allValid()) {
+
+            localStorage.setItem('full_name', value.full_name)
+            localStorage.setItem('email', value.email)
+            localStorage.setItem('phone', value.phone)            
+            localStorage.setItem('password', value.password)
+            localStorage.setItem('isLogin', 0)            
+
             setValue({
                 email: '',
+                phone: '',
                 full_name: '',
                 password: '',
                 confirm_password: '',
             });
+
             validator.hideMessages();
             toast.success('Registration Complete successfully!');
             props.history.push('/login');
@@ -48,32 +58,32 @@ const SignUpPage = (props) => {
         <Grid className="loginWrapper">
 
             <Grid className="loginForm">
-                <h2>Signup</h2>
-                <p>Signup your account</p>
+                <h2>Daftar</h2>
+                <p>Daftar akun</p>
                 <form onSubmit={submitForm}>
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
                             <TextField
                                 className="inputOutline"
                                 fullWidth
-                                placeholder="Full Name"
+                                placeholder=""
                                 value={value.full_name}
                                 variant="outlined"
                                 name="full_name"
-                                label="Name"
+                                label="Nama Lengkap"
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
                                 onBlur={(e) => changeHandler(e)}
                                 onChange={(e) => changeHandler(e)}
                             />
-                            {validator.message('full name', value.full_name, 'required|alpha')}
+                            {validator.message('full name', value.full_name, 'required|alpha_space')}
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
                                 className="inputOutline"
                                 fullWidth
-                                placeholder="E-mail"
+                                placeholder="Contoh: coklatku@gmail.com"
                                 value={value.email}
                                 variant="outlined"
                                 name="email"
@@ -90,7 +100,24 @@ const SignUpPage = (props) => {
                             <TextField
                                 className="inputOutline"
                                 fullWidth
-                                placeholder="Password"
+                                placeholder="Contoh: 0821xxxxxxxx"
+                                value={value.phone}
+                                variant="outlined"
+                                name="phone"
+                                label="No. Handphone"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                onBlur={(e) => changeHandler(e)}
+                                onChange={(e) => changeHandler(e)}
+                            />
+                            {validator.message('phone', value.phone, 'required|phone')}
+                        </Grid>                        
+                        <Grid item xs={12}>
+                            <TextField
+                                className="inputOutline"
+                                fullWidth
+                                placeholder=""
                                 value={value.password}
                                 variant="outlined"
                                 name="password"
@@ -105,10 +132,11 @@ const SignUpPage = (props) => {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
+                                type="password"
                                 className="inputOutline"
                                 fullWidth
-                                placeholder="Confirm Password"
-                                value={value.password}
+                                placeholder=""
+                                value={value.confirm_password}
                                 variant="outlined"
                                 name="confirm_password"
                                 label="Confirm Password"
@@ -122,14 +150,10 @@ const SignUpPage = (props) => {
                         </Grid>
                         <Grid item xs={12}>
                             <Grid className="formFooter">
-                                <Button fullWidth className="cBtn cBtnLarge cBtnTheme" type="submit">Sign Up</Button>
+                                <Button fullWidth className="cBtn cBtnLarge cBtnTheme" type="submit">Daftar</Button>
                             </Grid>
-                            <Grid className="loginWithSocial">
-                                <Button className="facebook"><i className="fa fa-facebook"></i></Button>
-                                <Button className="twitter"><i className="fa fa-twitter"></i></Button>
-                                <Button className="linkedin"><i className="fa fa-linkedin"></i></Button>
-                            </Grid>
-                            <p className="noteHelp">Already have an account? <Link to="/login">Return to Sign In</Link>
+
+                            <p className="noteHelp">Already have an account? <Link to="/login">Kembali ke Login</Link>
                             </p>
                         </Grid>
                     </Grid>

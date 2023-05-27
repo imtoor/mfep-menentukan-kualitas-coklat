@@ -18,7 +18,7 @@ export const receiveProducts = (products) => ({
 });
 
 export const addToCart = (product, qty, color, size) => (dispatch) => {
-  toast.success("Item Added to Cart");
+  toast.success("Item ditambahkan ke Keranjang");
   dispatch({
     type: types.ADD_TO_CART,
     product,
@@ -28,8 +28,20 @@ export const addToCart = (product, qty, color, size) => (dispatch) => {
   });
 };
 
+export const cartUpdated = () => {
+  toast.success("Keranjang telah di update");
+}
+
 export const removeFromCart = (product_id) => (dispatch) => {
-  toast.success("Item Removed from Cart");
+  toast.success("Item telah di hapus");
+  dispatch({
+    type: types.REMOVE_FROM_CART,
+    product_id,
+  });
+};
+
+export const removeFromCartOnCartPage = (product_id) => (dispatch) => {
+  toast.success("Item telah di hapus");
   dispatch({
     type: types.REMOVE_FROM_CART,
     product_id,
@@ -58,7 +70,7 @@ export const addToWishList = (product) => (dispatch) => {
 };
 
 export const removeFromWishList = (id) => (dispatch) => {
-  toast.error("Item removed from WishList");
+  toast.error("Item telah dihapus dari WishList");
   dispatch({
     type: REMOVE_FROM_WISHLIST,
     id,

@@ -89,22 +89,12 @@ const ProductGrid = ({ products, addToCartProduct,addToWishListProduct }) => {
                         <i className="fi flaticon-shopping-cart"></i>
                       </button>
                     </li>
-                    <li>
-                      <button
-                          data-bs-toggle="tooltip"
-                          data-bs-html="true"
-                          title="Add to Cart"
-                          onClick={() => addToWishListProduct(product)}
-                      >
-                          <i className="fi flaticon-like"></i>
-                      </button>
-                    </li>
                   </ul>
 
                 </div>
                 <div className="product-content">
                   <h3>
-                    <Link onClick={ClickHandler} onClick={ClickHandler} to={`/product-single/${product.id}`}>
+                    <Link onClick={ClickHandler} to={`/product-single/${product.id}`}>
                       {product.title.toUpperCase()}
                     </Link>
                   </h3>

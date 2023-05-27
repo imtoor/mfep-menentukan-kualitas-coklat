@@ -63,10 +63,10 @@ const FilterSidebar = ({ filter, changeHandler, priceChangeHandler }) => {
                 </label>
               </li>
               {harga.map((price) => (
-                <li>
+                <li key={price.id}>
                   <label className="topcoat-radio-button__label">
-                    Rp{price.min} {price.max ? "- Rp" : ""}
-                    {price.max || " ke atas"}
+                    Rp{new Intl.NumberFormat().format(price.min)} {new Intl.NumberFormat().format(price.max) ? "- Rp" : ""}
+                    {new Intl.NumberFormat().format(price.max) || " ke atas"}
                     <input
                       checked={filter.price.id === price.id}
                       type="radio"
@@ -99,14 +99,14 @@ const FilterSidebar = ({ filter, changeHandler, priceChangeHandler }) => {
                   <span className="topcoat-radio-button"></span>
                 </label>
               </li>
-              {tekstur.map((tekstur) => (
-                <li>
+              {tekstur.map((val) => (
+                <li key={val}>
                   <label className="topcoat-radio-button__label">
-                    {tekstur}
+                    {val}
                     <input
-                      checked={filter.tekstur === tekstur}
+                      checked={filter.tekstur === val}
                       type="radio"
-                      value={tekstur}
+                      value={val}
                       onChange={changeHandler}
                       name="tekstur"
                     />
@@ -136,7 +136,7 @@ const FilterSidebar = ({ filter, changeHandler, priceChangeHandler }) => {
                 </label>
               </li>
               {kadarAir.map((val) => (
-                <li>
+                <li key={val}>
                   <label className="topcoat-radio-button__label">
                     {val}
                     <input
@@ -172,7 +172,7 @@ const FilterSidebar = ({ filter, changeHandler, priceChangeHandler }) => {
                 </label>
               </li>
               {aroma.map((val) => (
-                <li>
+                <li key={val}>
                   <label className="topcoat-radio-button__label">
                     {val}
                     <input

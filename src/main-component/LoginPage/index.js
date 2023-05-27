@@ -12,8 +12,8 @@ import './style.scss';
 
 const LoginPage = (props) => {
     const [value, setValue] = useState({
-        email: 'user@gmail.com',
-        password: '123456',
+        email: '',
+        password: '',
         remember: false,
     });
 
@@ -33,19 +33,32 @@ const LoginPage = (props) => {
     const submitForm = (e) => {
         e.preventDefault();
         if (validator.allValid()) {
-            setValue({
-                email: '',
-                password: '',
-                remember: false
-            });
+
             validator.hideMessages();
 
-            const userRegex = /^user+.*/gm;
             const email = value.email;
+            const password = value.password;
 
-            if (email.match(userRegex)) {
-                toast.success('You successfully Login on Annahl !');
-                props.history.push('/home');
+            if (email.includes("@")) {
+                
+                if (localStorage.getItem('email') === null) {
+                    toast.error('User tidak ditemukan!');
+                    throw new Error('User tidak ditemukan!');
+                }
+
+                if (email === localStorage.getItem('email') && password === localStorage.getItem('password')) {
+                    toast.success('Berhasil login di Coklatku 🍫');
+                    localStorage.setItem('isLogin', 1);
+                    props.history.push('/');
+                } else {
+                    toast.error('Email atau Password Salah!');
+                }
+
+                setValue({
+                    email: '',
+                    password: '',
+                    remember: false
+                });
             }
         } else {
             validator.showMessages();
@@ -56,7 +69,7 @@ const LoginPage = (props) => {
         <Grid className="loginWrapper">
             <Grid className="loginForm">
                 <h2>Sign In</h2>
-                <p>Sign in to your account</p>
+                <p>Masuk ke dalam akun anda 👈</p>
                 <form onSubmit={submitForm}>
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
@@ -98,19 +111,19 @@ const LoginPage = (props) => {
                             <Grid className="formAction">
                                 <FormControlLabel
                                     control={<Checkbox checked={value.remember} onChange={rememberHandler}/>}
-                                    label="Remember Me"
+                                    label="Ingat Saya"
                                 />
-                                <Link to="/forgot-password">Forgot Password?</Link>
+                                <Link to="/forgot-password">Lupa Sandi ?</Link>
                             </Grid>
                             <Grid className="formFooter">
-                                <Button fullWidth className="cBtnTheme" type="submit">Login</Button>
+                                <Button fullWidth className="cBtnTheme" type="submit">Login</Button>&nbsp;
+                                <Button fullWidth className="cBtnTheme" type="button">
+                                    <Link to="/" style={{color:'#ffffff'}}>Home</Link>
+                                </Button>
+
                             </Grid>
-                            <Grid className="loginWithSocial">
-                                <Button className="facebook"><i className="fa fa-facebook"></i></Button>
-                                <Button className="twitter"><i className="fa fa-twitter"></i></Button>
-                                <Button className="linkedin"><i className="fa fa-linkedin"></i></Button>
-                            </Grid>
-                            <p className="noteHelp">Don't have an account? <Link to="/register">Create free account</Link>
+
+                            <p className="noteHelp">Belum punya akun ? <Link to="/register">Buat akun</Link>
                             </p>
                         </Grid>
                     </Grid>

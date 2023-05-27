@@ -8,14 +8,12 @@ import {withRouter} from "react-router-dom";
 
 import './style.scss';
 
-const CheckWrap = (props) => {
+const CheckWrap = (props, forms) => {
     const [value, setValue] = useState({
         email: 'user@gmail.com',
         password: '123456',
-        card_holder: 'Jhon Doe',
-        card_number: '589622144',
-        cvv: '856226',
-        expire_date: '',
+        card_holder: '',
+        card_number: '',
         remember: false,
     });
 
@@ -69,9 +67,9 @@ const CheckWrap = (props) => {
                         <Grid item sm={6} xs={12}>
                             <TextField
                                 fullWidth
-                                label="Card holder Name"
-                                name="card_holder"
-                                value={value.card_holder}
+                                label="Nama Lengkap"
+                                name="bank_holder"
+                                value={forms.bank_holder}
                                 onChange={(e) => changeHandler(e)}
                                 type="text"
                                 InputLabelProps={{
@@ -83,9 +81,9 @@ const CheckWrap = (props) => {
                         <Grid item sm={6} xs={12}>
                             <TextField
                                 fullWidth
-                                label="Card Number"
-                                name="card_number"
-                                value={value.card_number}
+                                label="Nomor Rekening"
+                                name="bank_number"
+                                value={forms.bank_number}
                                 onChange={(e) => changeHandler(e)}
                                 type="number"
                                 InputLabelProps={{
@@ -94,38 +92,8 @@ const CheckWrap = (props) => {
                                 className="formInput radiusNone"
                             />
                         </Grid>
-                        <Grid item sm={6} xs={12}>
-                            <TextField
-                                fullWidth
-                                label="CVV"
-                                name="cvv"
-                                value={value.cvv}
-                                onChange={(e) => changeHandler(e)}
-                                type="text"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                className="formInput radiusNone"
-                            />
-                        </Grid>
-                        <Grid item sm={6} xs={12}>
-                            <TextField
-                                fullWidth
-                                label="Expire Date"
-                                name="expire_date"
-                                value={value.expire_date}
-                                onChange={(e) => changeHandler(e)}
-                                type="date"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                className="formInput radiusNone"
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Grid className="formFooter mt-20">
-                                <Button fullWidth className="cBtn cBtnLarge cBtnTheme" type="submit">Proceed to Checkout</Button>
-                            </Grid>
+                        <Grid item sm={12} xs={12}>
+                            <p>Untuk kemudahan pengecekan, pastikan Nama Lengkap sesuai dengan Nomor Rekening anda.</p>
                         </Grid>
                     </Grid>
                 </form>
