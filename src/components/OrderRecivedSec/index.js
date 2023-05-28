@@ -14,7 +14,7 @@ const OrderRecivedSec = () => {
 
     const {id} = useParams();
 
-    const apiUrl = "http://localhost:8000/api/orders/" + id;
+    const apiUrl = "https://admin-coklat.nsdmcenter.com/api/orders/" + id;
   
     const [order, setOrder] = useState([{}])
     const [orderItem, setOrderItem] = useState([])

@@ -142,7 +142,7 @@ const CheckoutSection = ({cartList}) => {
             }
         }
 
-        await fetch("http://localhost:8000/api/orders", {
+        await fetch("https://admin-coklat.nsdmcenter.com/api/orders", {
             method: 'POST',
             body: JSON.stringify({
                 forms: forms,
