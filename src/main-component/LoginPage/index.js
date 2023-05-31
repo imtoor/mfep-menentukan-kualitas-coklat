@@ -54,10 +54,10 @@ const LoginPage = (props) => {
                         if (data.success) {
                             toast.success(data.message);
 
+                            localStorage.setItem('id', data.data.id)
                             localStorage.setItem('full_name', data.data.name)
                             localStorage.setItem('email', data.data.email)
-                            localStorage.setItem('phone', data.data.phone)            
-                            localStorage.setItem('password', data.data.password)
+                            localStorage.setItem('phone', data.data.phone)
                             localStorage.setItem('isLogin', 1)                            
 
                             setTimeout(() => {

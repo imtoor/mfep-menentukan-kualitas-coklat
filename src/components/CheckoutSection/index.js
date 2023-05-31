@@ -78,6 +78,7 @@ const CheckoutSection = ({cartList}) => {
         delivery: false,
     });
     const [forms, setForms] = useState({
+        users_id: window.localStorage.getItem('id'),
         name: window.localStorage.getItem("isLogin") == '1' ? window.localStorage.getItem("full_name"):'',
         address: '',
         email: window.localStorage.getItem("isLogin") == '1' ? window.localStorage.getItem("email"):'',
