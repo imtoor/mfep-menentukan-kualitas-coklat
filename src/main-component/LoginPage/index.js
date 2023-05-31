@@ -41,28 +41,40 @@ const LoginPage = (props) => {
 
             if (email.includes("@")) {
                 
-                if (localStorage.getItem('email') === null) {
-                    toast.error('User tidak ditemukan!');
-                    throw new Error('User tidak ditemukan!');
-                }
+                fetch(`https://admin-coklat.nsdmcenter.com/api/login-user`, {
+                    method: 'POST',
+                    body: JSON.stringify({email: email, password, password}),
+                    headers: {'Content-Type':'application/json; chartset=UTF-8'}
+                }).then(response => {
 
-                if (email === localStorage.getItem('email') && password === localStorage.getItem('password')) {
-                    toast.success('Berhasil login di Coklatku 🍫');
-                    localStorage.setItem('isLogin', 1);
-                    props.history.push('/');
-                } else {
-                    toast.error('Email atau Password Salah!');
-                }
+                    let res = response.json();
 
-                setValue({
-                    email: '',
-                    password: '',
-                    remember: false
-                });
+                    res.then(data => {
+
+                        if (data.success) {
+                            toast.success(data.message);
+
+                            localStorage.setItem('full_name', data.data.name)
+                            localStorage.setItem('email', data.data.email)
+                            localStorage.setItem('phone', data.data.phone)            
+                            localStorage.setItem('password', data.data.password)
+                            localStorage.setItem('isLogin', 1)                            
+
+                            setTimeout(() => {
+                                props.history.push('/')
+                            }, 1000);
+                        } else {
+                            toast.error(data.message);
+                        }
+
+                    })
+
+                })
+
             }
         } else {
             validator.showMessages();
-            toast.error('Empty field is not allowed!');
+            toast.error('Harap isi email dan password');
         }
     };
     return (

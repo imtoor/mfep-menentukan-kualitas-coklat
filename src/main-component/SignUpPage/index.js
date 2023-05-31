@@ -32,26 +32,47 @@ const SignUpPage = (props) => {
         e.preventDefault();
         if (validator.allValid()) {
 
-            localStorage.setItem('full_name', value.full_name)
-            localStorage.setItem('email', value.email)
-            localStorage.setItem('phone', value.phone)            
-            localStorage.setItem('password', value.password)
-            localStorage.setItem('isLogin', 0)            
+            let data = {
+                name: value.full_name,
+                email: value.email,
+                phone: value.phone,
+                password: value.password,
+                confirm_password: value.confirm_password,
+            };
 
-            setValue({
-                email: '',
-                phone: '',
-                full_name: '',
-                password: '',
-                confirm_password: '',
-            });
+            fetch(`https://admin-coklat.nsdmcenter.com/api/daftar-user`, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {'Content-Type':'application/json; chartset=UTF-8'}
+            }).then((response) => {
+                let res = response.json();
+                res.then(data => {
+                    
+                    localStorage.setItem('isLogin', 0);
+                    setValue({
+                        email: '',
+                        phone: '',
+                        full_name: '',
+                        password: '',
+                        confirm_password: '',
+                    });
 
-            validator.hideMessages();
-            toast.success('Registration Complete successfully!');
-            props.history.push('/login');
+                    if (data.success) {
+                        toast.success(data.message)
+                        validator.hideMessages();
+                        setTimeout(() => {
+                            props.history.push('/login');
+                        }, 1000);
+                    } else {
+                        toast.error(data.message)
+                    }
+
+                });
+            })
+
         } else {
             validator.showMessages();
-            toast.error('Empty field is not allowed!');
+            toast.error('Harap lengkapi isian atau periksa password anda');
         }
     };
     return (

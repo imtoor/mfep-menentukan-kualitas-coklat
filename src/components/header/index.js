@@ -63,6 +63,10 @@ class Header extends Component {
       if (localStorage.getItem('isLogin') !== null) {
         
         if (localStorage.getItem('isLogin') === '1') {
+          localStorage.removeItem('full_name')
+          localStorage.removeItem('email')
+          localStorage.removeItem('phone')            
+          localStorage.removeItem('password')
           localStorage.setItem('isLogin', 0)
         }
 
