@@ -143,7 +143,8 @@ const CheckoutSection = ({cartList}) => {
             }
         }
 
-        await fetch("https://admin-coklat.nsdmcenter.com/api/orders", {
+        let ordersUrl = process.env.REACT_APP_MODE === 'prod' ? process.env.REACT_APP_PROD_API_ENDPOINT + process.env.REACT_APP_ORDERS:process.env.REACT_APP_DEV_API_ENDPOINT + process.env.REACT_APP_ORDERS
+        await fetch(ordersUrl, {
             method: 'POST',
             body: JSON.stringify({
                 forms: forms,

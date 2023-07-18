@@ -14,14 +14,14 @@ const OrderRecivedSec = () => {
 
     const {id} = useParams();
 
-    const apiUrl = "https://admin-coklat.nsdmcenter.com/api/orders/" + id;
+    const orderReceivedUrl = process.env.REACT_APP_MODE === 'prod' ? process.env.REACT_APP_PROD_API_ENDPOINT + process.env.REACT_APP_ORDERS + `/${id}`:process.env.REACT_APP_DEV_API_ENDPOINT + process.env.REACT_APP_ORDERS + `/${id}`
   
     const [order, setOrder] = useState([{}])
     const [orderItem, setOrderItem] = useState([])
    
     useEffect(() => {
         
-        fetch(apiUrl, {
+        fetch(orderReceivedUrl, {
             method: 'GET',
             headers: {'Content-Type':'application/json; charset=UTF-8'}
         }).then((response) => {
@@ -48,7 +48,7 @@ const OrderRecivedSec = () => {
                 <div className="row">
                     <div className="order-top">
                         <h2>Terima kasih atas pesanan anda <span>Pesanan anda telah diterima.</span></h2>
-                        <Link to='/home' className="theme-btn">Back Home</Link>
+                        <Link to='/' className="theme-btn">Back Home</Link>
                     </div>
                     <Grid className="cartStatus">
                             <Grid container spacing={3}>

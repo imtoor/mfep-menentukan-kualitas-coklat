@@ -14,7 +14,7 @@ const ShopPage = ({ addToCart, addToWishList }) => {
 
     // const productsArray = api()
 
-  const apiUrl = "https://admin-coklat.nsdmcenter.com/api/get-products"
+  const apiUrl = process.env.REACT_APP_MODE === 'prod' ? process.env.REACT_APP_PROD_API_ENDPOINT + process.env.REACT_APP_GET_PRODUCTS:process.env.REACT_APP_DEV_API_ENDPOINT + process.env.REACT_APP_GET_PRODUCTS
   
   const [productsArray, setProductsArray] = useState([])
 

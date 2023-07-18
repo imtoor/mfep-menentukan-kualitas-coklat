@@ -40,7 +40,9 @@ const SignUpPage = (props) => {
                 confirm_password: value.confirm_password,
             };
 
-            fetch(`https://admin-coklat.nsdmcenter.com/api/daftar-user`, {
+            let signupUrl = process.env.REACT_APP_MODE === 'prod' ? process.env.REACT_APP_PROD_API_ENDPOINT + process.env.REACT_APP_DAFTAR_USER:process.env.REACT_APP_DEV_API_ENDPOINT + process.env.REACT_APP_DAFTAR_USER
+
+            fetch(signupUrl, {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {'Content-Type':'application/json; chartset=UTF-8'}

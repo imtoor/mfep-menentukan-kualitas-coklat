@@ -40,8 +40,8 @@ const LoginPage = (props) => {
             const password = value.password;
 
             if (email.includes("@")) {
-                
-                fetch(`https://admin-coklat.nsdmcenter.com/api/login-user`, {
+                let loginUrl = process.env.REACT_APP_MODE === 'prod' ? process.env.REACT_APP_PROD_API_ENDPOINT + process.env.REACT_APP_LOGIN_USER:process.env.REACT_APP_DEV_API_ENDPOINT + process.env.REACT_APP_LOGIN_USER
+                fetch(loginUrl, {
                     method: 'POST',
                     body: JSON.stringify({email: email, password, password}),
                     headers: {'Content-Type':'application/json; chartset=UTF-8'}
