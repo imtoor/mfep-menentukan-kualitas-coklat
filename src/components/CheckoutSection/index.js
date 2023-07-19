@@ -355,7 +355,6 @@ const CheckoutSection = ({cartList}) => {
                                                     onChange={(e) => changeHandler(e)}>
                                             
                                             <FormControlLabel value={delivery[0].name} onClick={() => {
-                                                
                                                 setDeliveryName(delivery[0].name);
                                                 setDeliveryFee(delivery[0].biaya);
                                                 
@@ -373,8 +372,8 @@ const CheckoutSection = ({cartList}) => {
                                                 setDeliveryFee(delivery[1].biaya);
 
                                                 setForms({...forms, 
-                                                    delivery: delivery[0].name,
-                                                    delivery_price: delivery[0].biaya,
+                                                    delivery: delivery[1].name,
+                                                    delivery_price: delivery[1].biaya,
                                                     total: totalPrice(cartList) + deliveryFee
                                                 });                                                
 
