@@ -8,16 +8,19 @@ import TableCell from "@material-ui/core/TableCell";
 import {totalPrice} from "../../utils";
 import whatsapp from "../../images/whatsapp.png"
 import './style.scss'
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 const OrderRecivedSec = () => {
 
+    const history = useHistory();
     const {id} = useParams();
 
     const orderReceivedUrl = process.env.REACT_APP_MODE === 'prod' ? process.env.REACT_APP_PROD_API_ENDPOINT + process.env.REACT_APP_ORDERS + `/${id}`:process.env.REACT_APP_DEV_API_ENDPOINT + process.env.REACT_APP_ORDERS + `/${id}`
   
     const [order, setOrder] = useState([{}])
     const [orderItem, setOrderItem] = useState([])
+
+    const [subTotal, setSubTotal] = useState(0)
    
     useEffect(() => {
         
@@ -28,8 +31,10 @@ const OrderRecivedSec = () => {
 
             let res = response.json();
             res.then(data => {
+                if (!data.success) history.push('/')
                 setOrder(data.data)
                 data.data.order_item.forEach(item => {
+                    setSubTotal(subTotal + (item.products.harga * item.qty))
                     setOrderItem(order => [item, ...order])
                 });
             });
@@ -86,7 +91,7 @@ const OrderRecivedSec = () => {
 
                                                 <TableRow>
                                                     <TableCell>Sub Total Produk</TableCell>
-                                                    <TableCell align="right">Rp{new Intl.NumberFormat().format(order.total)}</TableCell>
+                                                    <TableCell align="right">Rp{new Intl.NumberFormat().format(subTotal)}</TableCell>
                                                 </TableRow>
                                                 <TableRow>
                                                     <TableCell>Biaya Pengiriman: {order.delivery_name}</TableCell>
@@ -95,7 +100,7 @@ const OrderRecivedSec = () => {
                                                 <TableRow>
                                                     <TableCell><b>Total</b></TableCell>
                                                     <TableCell
-                                                        align="right"><b>Rp{new Intl.NumberFormat().format(order.total + order.delivery_price)}</b></TableCell>
+                                                        align="right"><b>Rp{new Intl.NumberFormat().format(order.total)}</b></TableCell>
                                                 </TableRow>
                                             </TableBody>
                                         </Table>
