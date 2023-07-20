@@ -90,10 +90,6 @@ const OrderRecivedSec = () => {
                                                 </TableRow>
 
                                                 <TableRow>
-                                                    <TableCell>Sub Total Produk</TableCell>
-                                                    <TableCell align="right">Rp{new Intl.NumberFormat().format(subTotal)}</TableCell>
-                                                </TableRow>
-                                                <TableRow>
                                                     <TableCell>Biaya Pengiriman: {order.delivery_name}</TableCell>
                                                     <TableCell align="right">Rp{new Intl.NumberFormat().format(order.delivery_price)}</TableCell>
                                                 </TableRow>                                                
