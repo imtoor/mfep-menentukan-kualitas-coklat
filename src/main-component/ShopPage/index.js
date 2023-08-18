@@ -23,11 +23,20 @@ const ShopPage = ({ addToCart, addToWishList }) => {
     const request = await fetch(apiUrl)
     const response = await request.json()
 
+    let baseUrl = undefined
+
+    if (process.env.REACT_APP_MODE === 'dev') {
+      baseUrl = process.env.REACT_APP_DEV_BASE_URL + 'img/products/'
+    } else {
+      baseUrl = process.env.REACT_APP_PROD_BASE_URL + 'img/products/'
+    }
+
     response.data.forEach((item) => {
       
+
       setProductsArray(productsArray => [{
         "id": item.id,
-        "proImg": "/product/1.png",
+        "proImg": baseUrl + item.gambar,
         "offer": "",
         "title": item.nama,
         "price": item.harga,
@@ -35,73 +44,14 @@ const ShopPage = ({ addToCart, addToWishList }) => {
         "link": "/product-single",
         "size": "small",
         "color": "000",
-        "brand": "forest",
-        "stock": "In Stock",
+        "stok": item.stok,
         "tekstur": item.tekstur,
         "kadarAir": item.kadar_air,
         "aroma": item.aroma,
         "satuan": item.satuan,
       }, ...productsArray])
       
-    })   
-
-    // setProductsArray([
-    //   {
-    //   "id": 1,
-    //   "proImg": "/product/1.png",
-    //   "offer": "-28%",
-    //   "title": 'ciollo',
-    //   "price": 100000,
-    //   "delPrice": "",
-    //   "link": "/product-single",
-    //   "size": "small",
-    //   "color": "000",
-    //   "brand": "kakao",
-    //   "stock": "Ada Stok",
-    //   "tekstur": 'keras',
-    //   "kadarAir": 'rendah',
-    //   "aroma": 'tidak berbau',
-    //   "satuan": 'Kg',
-    //   "weightEvaluation":0
-    //   },
-    //   {
-    //   "id": 2,
-    //   "proImg": "/product/1.png",
-    //   "offer": "-28%",
-    //   "title": 'forastero',
-    //   "price": 80000,
-    //   "delPrice": "",
-    //   "link": "/product-single",
-    //   "size": "small",
-    //   "color": "000",
-    //   "brand": "kakao",
-    //   "stock": "Ada Stok",
-    //   "tekstur": 'sedang',
-    //   "kadarAir": 'sedang',
-    //   "aroma": 'busuk',
-    //   "satuan": 'Kg',
-    //   "weightEvaluation":0        
-    //   },
-    //   {
-    //   "id": 3,
-    //   "proImg": "/product/1.png",
-    //   "offer": "-28%",
-    //   "title": 'trinitario',
-    //   "price": 130000,
-    //   "delPrice": "",
-    //   "link": "/product-single",
-    //   "size": "small",
-    //   "color": "000",
-    //   "brand": "kakao",
-    //   "stock": "Ada Stok",
-    //   "tekstur": 'lembek',
-    //   "kadarAir": 'tinggi',
-    //   "aroma": 'harum',
-    //   "satuan": 'Kg',
-    //   "weightEvaluation":0          
-    //   }
-    // ])
-
+    })
   }
 
   useEffect(() => {

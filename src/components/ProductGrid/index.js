@@ -110,6 +110,7 @@ const ProductGrid = ({ products, addToCartProduct,addToWishListProduct }) => {
                     <div className="product-price">
                       <ul>
                         <li><h3>Rp{new Intl.NumberFormat().format(product.price)},-</h3></li>
+                        <li>Stok: {product.stok}</li>
                         <li></li>
                       </ul>
                     </div>
