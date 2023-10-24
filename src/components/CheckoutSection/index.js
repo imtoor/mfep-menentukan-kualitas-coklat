@@ -126,23 +126,15 @@ const CheckoutSection = ({cartList}) => {
     async function submit() {
 
         let frm = Object.keys(forms);
+        console.log(forms);
 
         for (let i = 0; i < frm.length; i++) {
-            if (frm[i] === 'payment_method' && forms[frm[i]] === 'bank_transfer') {
-                if(forms[frm[i+1]] === '' || forms[frm[i+2]] === '' || forms[frm[i+3]] === '') {
-                    toast.error('Harap lengkapi data bank anda!');
-                    return;
-                }
-            } else {
-                if (frm[i] !== 'note' && frm[i] !== 'bank' && frm[i] !== 'bank_holder' && frm[i] !== 'bank_number') {
-                     if(forms[frm[i]] === '' || forms[frm[i]] === undefined) {
-                        toast.error('Harap lengkapi data pengiriman anda!');
-                        return;
-                     }
-                }
+            if (frm[i] === 'delivery' && forms[frm[i]] === '') {
+                toast.error('Harap pilih pengiriman anda!');
+                return;
             }
         }
-
+        
         let ordersUrl = process.env.REACT_APP_MODE === 'prod' ? process.env.REACT_APP_PROD_API_ENDPOINT + process.env.REACT_APP_ORDERS:process.env.REACT_APP_DEV_API_ENDPOINT + process.env.REACT_APP_ORDERS
         await fetch(ordersUrl, {
             method: 'POST',
@@ -288,56 +280,9 @@ const CheckoutSection = ({cartList}) => {
                                             <FormControlLabel value="bank_transfer" control={<Radio color="primary"/>}
                                                     label="Via Bank Transfer "/>
                                             <FormControlLabel value="cash" control={<Radio color="primary"/>}
-                                                            label="Via COD"/>
-                                            
+                                                            label="Via COD"/>                                            
                                         </RadioGroup>
-                                        <Collapse in={forms.payment_method === 'bank_transfer'} timeout="auto">
-                                            <Grid className="cardType">
-                                                {cardType.map((item, i) => (
-                                                    <Grid
-                                                        key={i}
-                                                        className={`cardItem ${forms.bank === item.title ? 'active' : null}`}
-                                                        onClick={() => setForms({...forms, bank: item.title})}>
-                                                        <img src={item.img} alt={item.title}/>
-                                                    </Grid>
-                                                ))}
-                                            </Grid>
-                                        </Collapse>
-                                        <Collapse in={forms.payment_method === 'bank_transfer'}>
-                                            <Grid container spacing={3}>
-                                                <Grid item sm={6} xs={12}>
-                                                    <TextField
-                                                        fullWidth
-                                                        label="Nama Lengkap"
-                                                        name="bank_holder"
-                                                        value={forms.bank_holder}
-                                                        onChange={(e) => changeHandler(e)}
-                                                        type="text"
-                                                        InputLabelProps={{
-                                                            shrink: true,
-                                                        }}
-                                                        className="formInput radiusNone"
-                                                    />
-                                                </Grid>
-                                                <Grid item sm={6} xs={12}>
-                                                    <TextField
-                                                        fullWidth
-                                                        label="Nomor Rekening"
-                                                        name="bank_number"
-                                                        value={forms.bank_number}
-                                                        onChange={(e) => changeHandler(e)}
-                                                        type="number"
-                                                        InputLabelProps={{
-                                                            shrink: true,
-                                                        }}
-                                                        className="formInput radiusNone"
-                                                    />
-                                                </Grid>
-                                                <Grid item sm={12} xs={12}>
-                                                    <p>Untuk kemudahan pengecekan, pastikan Nama Lengkap sesuai dengan Nomor Rekening anda.</p>
-                                                </Grid>
-                                            </Grid>
-                                        </Collapse>
+  
                                     </Collapse>
                                 </Grid>
                             </Grid>

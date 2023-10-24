@@ -112,7 +112,7 @@ const OrderRecivedSec = () => {
                                 Chat Admin <img src={whatsapp} width="35px" />
                             </a>
                             <h2>
-                                <span>BANK BNI, 4688912938 - A/N ASHAR </span><p></p>
+                                <span>BANK BRI, 107301002981533 - A/N ASHAR </span><p></p>
                                 <h6>Lalu CHAT ADMIN untuk Konfirmasi agar pesanan anda segera diproses. Terima Kasih</h6>
                             </h2>
                         </div>}
