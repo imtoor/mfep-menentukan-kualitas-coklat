@@ -3,18 +3,18 @@ import React from "react";
 const harga = [
   {
     id: 1,
-    min: 75000,
-    max: 100000,
+    min: 15000,
+    max: 20000,
   },
   {
     id: 2,
-    min: 100000,
-    max: 125000,
+    min: 20000,
+    max: 30000,
   },
   {
     id: 3,
-    min: 125000,
-    max: null,
+    min: 30000,
+    max: 50000,
   },
 ];
 
